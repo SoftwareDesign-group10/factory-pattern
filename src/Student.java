@@ -1,0 +1,12 @@
+
+public class Student extends UniversityUser {
+//constructor
+	public Student(String email,String password,String accountType,String userName){
+	   super(email, password, accountType, userName);
+	   setHourlyRate();
+	}
+	@Override
+	protected void setHourlyRate() {
+		this.hourlyRate = 20.0;
+	}
+}
