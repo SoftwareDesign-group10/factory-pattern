@@ -1,0 +1,20 @@
+# Build output
+bin/
+*.class
+
+# CSV "database" files -- everyone generates their own locally;
+# committing them causes merge conflicts. Remove these lines if the
+# team decides to commit shared sample data on purpose.
+data/*.csv
+test-data/
+
+# The jar is not committed -- each person copies it in locally (see lib/ note)
+lib/javacsv.jar
+
+# IDE (keep .project/.classpath committed so everyone gets the same setup)
+.settings/
+.idea/
+*.iml
+
+# OS
+.DS_Store
