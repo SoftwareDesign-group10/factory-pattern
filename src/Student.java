@@ -6,7 +6,7 @@ public class Student extends UniversityUser {
 	   setHourlyRate();
 	}
 	@Override
-	protected void setHourlyRate() {
+	public void setHourlyRate() {
 		this.hourlyRate = 20.0;
 	}
 }

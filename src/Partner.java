@@ -5,7 +5,7 @@ public class Partner extends RegisteredUser {
 		super(email, password, accountType, userName);
 		   setHourlyRate();
 	}
-	protected void setHourlyRate() {
+	public void setHourlyRate() {
 		this.hourlyRate = 50.0;
 	}
 }

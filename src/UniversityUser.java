@@ -1,12 +1,12 @@
 
 public abstract class UniversityUser extends RegisteredUser {
-	//constructor
-	public UniversityUser(
+
+    public UniversityUser(
             String email,
             String password,
-            String userName,
-            String accountType) {
+            String accountType,
+            String userName) {
 
-        super(email, password, accountType,userName);
+        super(email, password, accountType, userName);
     }
 }

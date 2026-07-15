@@ -17,19 +17,26 @@ public abstract class RegisteredUser {
 
 	        this.email = email;
 	        this.password = password;
-	        this.userName = userName;
 	        this.accountType = accountType;
+	        this.userName = userName;
 	    }
 	//getter methods
-	public String getPassword() {
+	/*password shouldn't be called by anyone.
+	 * public String getPassword() {
 		return password;
-	}
+	}*/ 
 
 	public String getEmail() {
 		return email;
 	}
 	public String getUserName() {
 		return userName;
+	}
+	public String getAccountType() {
+		return accountType;
+	}
+	public double getHourlyRate() {
+		return hourlyRate;
 	}
 	
 	//will be implemented inside each of each subclass

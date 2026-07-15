@@ -21,7 +21,7 @@ public class main {
             String userName = input.nextLine();
 
             System.out.print(
-                    "Enter account type (STUDENT, STAFF, FACULTY): ");
+                    "Enter account type (STUDENT, STAFF, FACULTY, PARTNER): ");
             String accountType = input.nextLine();
 
             RegisteredUser user =
@@ -38,6 +38,10 @@ public class main {
 
             System.out.println(
                     "Username: " + user.getUserName());
+            
+            System.out.println("your user is of type "+ user.getAccountType());
+            
+            System.out.println("Hourly rate is: "+ user.getHourlyRate());
 
         } catch (IllegalArgumentException e) {
 
@@ -46,8 +50,9 @@ public class main {
 
             System.out.println(
                     "Reason: " + e.getMessage());
+        
+  
         }
-
         input.close();
     }
 }

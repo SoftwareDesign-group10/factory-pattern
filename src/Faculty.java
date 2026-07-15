@@ -5,7 +5,7 @@ public class Faculty extends UniversityUser {
 		super(email, password, accountType, userName);
 		   setHourlyRate();
 	}
-	protected void setHourlyRate() {
+	public void setHourlyRate() {
 		this.hourlyRate = 30.0;
 	}
 

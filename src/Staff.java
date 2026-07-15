@@ -6,7 +6,7 @@ public class Staff extends UniversityUser {
 		   setHourlyRate();
 	}
 	//setter method
-	protected void setHourlyRate() {
+	public void setHourlyRate() {
 		this.hourlyRate = 40.0;
 	}
 }
