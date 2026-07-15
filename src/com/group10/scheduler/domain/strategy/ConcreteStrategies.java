@@ -1,45 +1,69 @@
 package com.group10.scheduler.domain.strategy;
-
 import com.group10.scheduler.domain.PaymentMethod;
+//Three payment methods required by req10
+public final class ConcreteStrategies{
+    private ConcreteStrategies (){
 
-/** Placeholder ConcreteStrategy classes — always succeed. Swap for real logic. */
-public class ConcreteStrategies {
-
-    public static class CreditCardStrategy implements PaymentStrategy {
-        private String cardNumber, expiryDate, cvv;
-        public CreditCardStrategy(String cardNumber, String expiryDate, String cvv) {
-            this.cardNumber = cardNumber; this.expiryDate = expiryDate; this.cvv = cvv;
-        }
-        public boolean pay(double amount) { return true; }
-        public boolean refund(double amount) { return true; }
     }
-
-    public static class DebitCardStrategy implements PaymentStrategy {
-        private String cardNumber, pin;
-        public DebitCardStrategy(String cardNumber, String pin) {
-            this.cardNumber = cardNumber; this.pin = pin;
+    public static class CreditCardStrategy implements PaymentStrategy{
+        private final String cardNumber;
+        private final String expiryDate;
+        private final String cvv;
+        public CreditCardStrategy (String cardNumber, String expiryDate, String cvv){
+            this.cardNumber= cardNumber;
+            this.expiryDate= expiryDate;
+            this.cvv= cvv;
         }
-        public boolean pay(double amount) { return true; }
-        public boolean refund(double amount) { return true; }
+        @Override
+        public boolean pay (double amount){
+            return amount> 0 && expiryDate!= null && !expiryDate.isEmpty () && cvv!= null && !cvv.isEmpty () && cardNumber!= null && !cardNumber.isEmpty ();
+        }
+        @Override
+        public boolean refund (double amount){
+            return amount> 0 && expiryDate!= null && !expiryDate.isEmpty () && cvv!= null && !cvv.isEmpty () && cardNumber!= null && !cardNumber.isEmpty ();
+        }
     }
-
-    public static class InstitutionalBillingStrategy implements PaymentStrategy {
-        private long organizationId;
-        private String billingAccount;
-        public InstitutionalBillingStrategy(long organizationId, String billingAccount) {
-            this.organizationId = organizationId; this.billingAccount = billingAccount;
+    public static class DebitCardStrategy implements PaymentStrategy{
+        private final String cardNumber;
+        private final String pin;
+        public DebitCardStrategy (String cardNumber, String pin){
+            this.cardNumber= cardNumber;
+            this.pin= pin;
         }
-        public boolean pay(double amount) { return true; }
-        public boolean refund(double amount) { return true; }
+        @Override
+        public boolean pay (double amount){
+            return amount> 0 && cardNumber!= null && !cardNumber.isEmpty () && pin!= null && !pin.isEmpty ();
+        }
+        @Override
+        public boolean refund (double amount){
+            return amount> 0 && cardNumber!= null && !cardNumber.isEmpty () && pin!= null && !pin.isEmpty ();
+        }
     }
-
-    /** Minimal reconstruction from a CSV method string; card/org details would come from user profile in the real system. */
-    public static PaymentStrategy fromMethod(PaymentMethod method) {
-        switch (method) {
-            case CREDIT_CARD: return new CreditCardStrategy("0000", "00/00", "000");
-            case DEBIT_CARD: return new DebitCardStrategy("0000", "0000");
-            case INSTITUTIONAL_BILLING: return new InstitutionalBillingStrategy(0L, "N/A");
-            default: throw new IllegalArgumentException("Unknown method: " + method);
+    public static class InstitutionalBillingStrategy implements PaymentStrategy{
+        private final long organizationId;
+        private final String billingAccount;
+        public InstitutionalBillingStrategy (long organizationId, String billingAccount){
+            this.organizationId= organizationId;
+            this.billingAccount= billingAccount;
         }
+        @Override
+        public boolean pay (double amount){
+            return amount> 0 && organizationId> 0 && billingAccount!= null && !billingAccount.isEmpty ();
+        }
+        @Override
+        public boolean refund (double amount){
+            return amount> 0 && organizationId> 0 && billingAccount!= null && !billingAccount.isEmpty ();
+        }
+    }
+    public static PaymentStrategy fromMethod (PaymentMethod method){
+        if (method== null){
+            throw new IllegalArgumentException ("Payment method cannot be null.");
+        }
+        return switch (method){
+            case CREDIT_CARD-> new CreditCardStrategy ("0000000000000000", "12/30", "000");
+            case DEBIT_CARD-> new DebitCardStrategy ("0000000000000000", "0000");
+            case INSTITUTIONAL_BILLING-> new InstitutionalBillingStrategy (1L, "DEFAULT");
+            //default-> throw new IllegalArgumentException("Unknown method: " + method);
+        };
     }
 }
