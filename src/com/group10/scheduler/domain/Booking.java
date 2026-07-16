@@ -82,7 +82,7 @@ public class Booking{
     }*/
     /** Req4: called when a user doesn't check in within the 30 minutes window. */
     public void forfeitDeposit (){
-        this.depositAmount = 0;
+        // The paid deposit is kept and not refunded.
     }
     // Getters and setters used by persistence and GUI
     public String getBookingId (){
