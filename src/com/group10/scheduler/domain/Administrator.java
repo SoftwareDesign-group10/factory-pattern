@@ -5,7 +5,7 @@ private String name;
 private String email;
 private RoomManager roomManager;
 
-//package private Constrcutor only will be called by chief 
+//package private Constructor only will be called by chief 
 Administrator(long adminId,String name,String email){
 	this.adminId=adminId;
 	this.name=name;
@@ -31,10 +31,20 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
+//calling functions from room manager class 
 public void addRoom(Room r) {
 	roomManager.addRoom(r);
 }
-public enableRoom() {
-	
+
+public void enableRoom(String roomId) {
+    roomManager.enableRoom(roomId);
+}
+
+public void disableRoom(String roomId) {
+    roomManager.disableRoom(roomId);
+}
+
+public void closeRoom(String roomId) {
+    roomManager.closeRoom(roomId);
 }
 }
