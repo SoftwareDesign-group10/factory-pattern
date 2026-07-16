@@ -1,12 +1,14 @@
 package com.group10.scheduler.domain.account;
+
 public class Staff extends UniversityUser {
-	//constructor 
-	public Staff(String email,String password,String accountType,String userName) {
+	private static final double HOURYLY_RATE = 40.0;
+
+	// constructor
+	public Staff(String email, String password, String accountType, String userName) {
 		super(email, password, accountType, userName);
-		   setHourlyRate();
 	}
-	//setter method
-	public void setHourlyRate() {
-		this.hourlyRate = 40.0;
+
+	public double getHourlyRate() {
+		return HOURYLY_RATE;
 	}
 }

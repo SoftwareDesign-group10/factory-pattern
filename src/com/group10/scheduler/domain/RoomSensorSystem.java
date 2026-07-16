@@ -1,25 +1,36 @@
 package com.group10.scheduler.domain;
 
-/**
- * Per the diagram: one RoomSensorSystem per Room (1-to-1), used during
- * check-in to verify occupancy and scan the user's ID badge (Req5).
- * Stubbed to always succeed — replace detectOccupancy()/scanIDBadge() with
- * real hardware/simulation logic when that's defined.
- */
 public class RoomSensorSystem {
-    private String sensorID;
+	
+	private String sensorId;
+    private boolean occupied=false;
 
-    public RoomSensorSystem(String sensorID) {
-        this.sensorID = sensorID;
-    }
+    // Simulates receiving occupancy data from a sensor
 
     public boolean detectOccupancy() {
-        return true; // placeholder — no real sensor hardware to simulate
+        return occupied;
     }
 
-    public boolean scanIDBadge(String userID) {
-        return true; // placeholder
-    }
+    // Simulates scanning a badge
+    public boolean scanBadge(String badgeId) {
 
-    public String getSensorID() { return sensorID; }
+        if (badgeId == null || badgeId.isBlank()) {
+            throw new IllegalArgumentException("Invalid badge ID.");
+        }
+        this.occupied=true;
+
+        return true;
+    }
+    public String getSensorId() {
+    	return sensorId;
+    }
+    public void setSensorId(String sensorId) {
+    	this.sensorId=sensorId;
+    }
+    public boolean getOccupied() {
+    	return occupied;
+    }
+    public void setOccupied(boolean occupied) {
+    	this.occupied=occupied;
+    }
 }

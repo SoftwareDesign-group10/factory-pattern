@@ -1,15 +1,16 @@
 package com.group10.scheduler.domain.account;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class AccountManagement {
 	private final Set<String> registeredEmails = new HashSet<>();
-	//calling the factory method to create account 
+	// calling the factory method to create account
 	private final RegisteredUserFactory factory;
 
 	// constructor
 	public AccountManagement() {
-	    factory = new RegisteredUserFactory();
+		factory = new RegisteredUserFactory();
 	}
 
 	// creating an enum for account types with flexibility of adding more types
@@ -119,42 +120,26 @@ public class AccountManagement {
 	}
 
 	// checks everything
-	public void validateAccount(
-	        String email,
-	        String password,
-	        String accountType,
-	        String userName) {
+	public void validateAccount(String email, String password, String accountType, String userName) {
 
-	    validateEmail(email);
-	    validatePassword(password);
-	    validateUserName(userName);
+		validateEmail(email);
+		validatePassword(password);
+		validateUserName(userName);
 
-	    AccountType type = validateAccountType(accountType);
+		AccountType type = validateAccountType(accountType);
 
-	    if (type.requiresUniversityVerification()) {
-	        verifyUniversityAccount(email);
-	    }
+		if (type.requiresUniversityVerification()) {
+			verifyUniversityAccount(email);
+		}
 
-	    registeredEmails.add(email.trim().toLowerCase());
+		registeredEmails.add(email.trim().toLowerCase());
 	}
-	public RegisteredUser createAccount(
-	        String email,
-	        String password,
-	        String accountType,
-	        String userName) {
 
-	    validateAccount(
-	            email,
-	            password,
-	            accountType,
-	            userName
-	    );
+	public RegisteredUser createAccount(String email, String password, String accountType, String userName) {
 
-	    return factory.createUser(
-	            email.trim().toLowerCase(),
-	            password,
-	            accountType.trim().toUpperCase(),
-	            userName.trim()
-	    );
+		validateAccount(email, password, accountType, userName);
+
+		return factory.createUser(email.trim().toLowerCase(), password, accountType.trim().toUpperCase(),
+				userName.trim());
 	}
 }

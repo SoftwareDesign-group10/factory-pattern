@@ -1,11 +1,14 @@
 package com.group10.scheduler.domain.account;
+
 public class Partner extends RegisteredUser {
-	//constructor
-	public Partner(String email,String password,String accountType,String userName) {
+	private static final double HOURYLY_RATE = 50.0;
+
+	// constructor
+	public Partner(String email, String password, String accountType, String userName) {
 		super(email, password, accountType, userName);
-		   setHourlyRate();
 	}
-	public void setHourlyRate() {
-		this.hourlyRate = 50.0;
+
+	public double getHourlyRate() {
+		return HOURYLY_RATE;
 	}
 }

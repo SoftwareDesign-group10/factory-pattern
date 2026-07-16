@@ -1,4 +1,5 @@
 package com.group10.scheduler.domain.account;
+
 public class RegisteredUserFactory {
 
 	public RegisteredUser createUser(String email, String password, String accountType, String userName) {
