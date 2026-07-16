@@ -5,8 +5,9 @@ public abstract class UniversityUser extends RegisteredUser {
             String email,
             String password,
             String accountType,
-            String userName) {
+            String userName,
+            String organizationId) {
 
-        super(email, password, accountType, userName);
+        super(email, password, accountType, userName,organizationId);
     }
 }

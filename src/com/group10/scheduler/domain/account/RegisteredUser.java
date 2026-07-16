@@ -7,22 +7,21 @@ public abstract class RegisteredUser {
 	private String password;
 	private String userName;
 	protected String accountType;
-	// protected double hourlyRate;
-	private long organizationId;
+	private String organizationId;
 
 	// constructor
-	public RegisteredUser(String email, String password, String accountType, String userName) {
+	public RegisteredUser(String email, String password, String accountType, String userName,  String organizationId) {
 
 		this.email = email;
 		this.password = password;
 		this.accountType = accountType;
 		this.userName = userName;
+		this.organizationId = organizationId;
 	}
 	// getter methods
-	/*
-	 * password shouldn't be called by anyone. public String getPassword() { return
-	 * password; }
-	 */
+	
+	public String getPassword() {
+		return password; }
 
 	public String getEmail() {
 		return email;
@@ -36,7 +35,15 @@ public abstract class RegisteredUser {
 		return accountType;
 	}
 
-	// will be implemented inside each of each subclass
-	// protected abstract void setHourlyRate();
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
 
+	public String getOrganizationId() {
+		return organizationId;
+	}
+
+	public void setOrganizationId(String organizationId) {
+		this.organizationId = organizationId;
+	}
 }

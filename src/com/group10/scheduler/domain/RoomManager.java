@@ -22,7 +22,7 @@ public class RoomManager {
     }
 
     // Search for a room using its room ID
-    private Room findRoomById(String roomId) {
+    public Room findRoomById(String roomId) {
 
         for (Room room : rooms) {
             if (room.getRoomId().equals(roomId)) {

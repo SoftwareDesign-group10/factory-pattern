@@ -1,10 +1,13 @@
 package com.group10.scheduler.domain.account;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AccountManagement {
 	private final Set<String> registeredEmails = new HashSet<>();
+	private final List<RegisteredUser> registeredUsers = new ArrayList<>();
 	// calling the factory method to create account
 	private final RegisteredUserFactory factory;
 
@@ -118,28 +121,58 @@ public class AccountManagement {
 			throw new IllegalArgumentException("Unsupported account type: " + accountType);
 		}
 	}
+	private void validateOrganizationId(String organizationId) {
+
+	    if (organizationId == null || organizationId.isBlank()) {
+	        throw new IllegalArgumentException(
+	            "Organization ID cannot be empty.");
+	    }
+
+	    if (!organizationId.matches("\\d{9}")) {
+	        throw new IllegalArgumentException(
+	            "Organization ID must contain exactly 9 digits.");
+	    }
+	}
 
 	// checks everything
-	public void validateAccount(String email, String password, String accountType, String userName) {
+	public void validateAccount(String email, String password, String accountType, String userName, String organizationId ) {
 
 		validateEmail(email);
 		validatePassword(password);
 		validateUserName(userName);
+		validateOrganizationId(organizationId);
 
 		AccountType type = validateAccountType(accountType);
 
 		if (type.requiresUniversityVerification()) {
 			verifyUniversityAccount(email);
 		}
-
-		registeredEmails.add(email.trim().toLowerCase());
 	}
 
-	public RegisteredUser createAccount(String email, String password, String accountType, String userName) {
+	public RegisteredUser createAccount(String email, String password, String accountType, String userName, String organizationId) {
 
-		validateAccount(email, password, accountType, userName);
+		validateAccount(email, password, accountType, userName, organizationId);
+		RegisteredUser user= factory.createUser(email.trim().toLowerCase(), password, accountType.trim().toUpperCase(),
+				userName.trim(),organizationId.trim());
+		   registeredUsers.add(user);
+		   registeredEmails.add(email.trim().toLowerCase());
+		   return user;
+	}
+	//Finding the user by email
+	public RegisteredUser findByEmail(String email) {
 
-		return factory.createUser(email.trim().toLowerCase(), password, accountType.trim().toUpperCase(),
-				userName.trim());
+	    if (email == null || email.isBlank()) {
+	        return null;
+	    }
+
+	    String normalizedEmail = email.trim().toLowerCase();
+
+	    for (RegisteredUser user : registeredUsers) {
+	        if (user.getEmail().equalsIgnoreCase(normalizedEmail)) {
+	            return user;
+	        }
+	    }
+
+	    return null;
 	}
 }

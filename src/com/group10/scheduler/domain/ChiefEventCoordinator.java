@@ -17,7 +17,7 @@ public class ChiefEventCoordinator {
 	    return instance;
 	}
 //Only the chief should create administrators 
-	public Administrator generateAdministratorAccount(long adminId,String name,String email) {
+	public Administrator generateAdministratorAccount(String adminId,String name,String email) {
 		return new Administrator(adminId,name,email);
 	}
 }

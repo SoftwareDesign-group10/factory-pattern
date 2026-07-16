@@ -1,22 +1,22 @@
 package com.group10.scheduler.domain;
 public class Administrator {
-private long adminId;
+private String adminId;
 private String name;
 private String email;
 private RoomManager roomManager;
 
 //package private Constructor only will be called by chief 
-Administrator(long adminId,String name,String email){
+Administrator(String adminId,String name,String email){
 	this.adminId=adminId;
 	this.name=name;
 	this.email=email;
 	roomManager = new RoomManager ();
 }
 //setters and getters
-public long getAdminId() {
+public String getAdminId() {
 	return adminId;
 }
-public void setAdminId(long adminId) {
+public void setAdminId(String adminId) {
 	this.adminId = adminId;
 }
 public String getName() {
